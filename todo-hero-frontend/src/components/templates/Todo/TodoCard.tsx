@@ -5,10 +5,15 @@ import { type Todo } from "../../../types/Todo";
 
 type TodoCardProps = {
   todo: Todo;
-  onClick: (id: Todo["id"]) => void;
+  completeTodoCallback: (id: Todo["id"]) => void;
+  unCompleteTodoCallback: (id: Todo["id"]) => void;
 };
 
-const TodoCard = ({ todo, onClick }: TodoCardProps) => {
+const TodoCard = ({
+  todo,
+  completeTodoCallback,
+  unCompleteTodoCallback,
+}: TodoCardProps) => {
   return (
     <Card className="mb-4">
       <Card.Title>{todo.title}</Card.Title>
@@ -19,7 +24,8 @@ const TodoCard = ({ todo, onClick }: TodoCardProps) => {
           Completed{" "}
           <Checkbox
             readOnly
-            onClick={() => onClick(todo.id)}
+            positiveCallback={() => completeTodoCallback(todo.id)}
+            negativeCallback={() => unCompleteTodoCallback(todo.id)}
             checked={todo.is_completed}
           />
         </span>

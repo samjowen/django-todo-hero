@@ -7,10 +7,15 @@ import FlexList from "../../primitives/FlexList";
 
 type TodoListProps = {
   todos: Todo[];
-  onTodoClick: (id: string) => void;
+  completeTodoCallback: (id: string) => void;
+  unCompleteTodoCallback: (id: string) => void;
 };
 
-const TodoList = ({ todos, onTodoClick }: TodoListProps) => {
+const TodoList = ({
+  todos,
+  completeTodoCallback,
+  unCompleteTodoCallback,
+}: TodoListProps) => {
   if (todos.length === 0) {
     return <TodoListEmpty />;
   }
@@ -21,7 +26,8 @@ const TodoList = ({ todos, onTodoClick }: TodoListProps) => {
         <TodoCard
           key={todo.id}
           todo={todo}
-          onClick={() => onTodoClick(todo.id)}
+          completeTodoCallback={() => completeTodoCallback(todo.id)}
+          unCompleteTodoCallback={() => unCompleteTodoCallback(todo.id)}
         />
       ))}
     </FlexList>

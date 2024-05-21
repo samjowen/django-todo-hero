@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "./App.css";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import getTodos from "./api/Todo/getTodos";
 import TodoList from "./components/templates/TodoList";
 import completeTodo from "./api/Todo/completeTodo";
+import unCompleteTodo from "./api/Todo/unCompleteTodo";
 function App() {
   const queryClient = useQueryClient();
   const { data } = useQuery({ queryKey: ["todos"], queryFn: getTodos });
@@ -14,13 +15,26 @@ function App() {
     },
   });
 
-  const handleCompleteTodo = (id: string) => {
-    completeTodoFn(id);
-  };
+  const { mutate: unCompleteTodoFn } = useMutation({
+    mutationFn: unCompleteTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+    },
+  });
 
-  const handleUncompleteTodo = (id: string) => {
-    console.log("Uncomplete Todo", id);
-  }
+  const handleCompleteTodo = useCallback(
+    (id: string) => {
+      completeTodoFn(id);
+    },
+    [completeTodoFn]
+  );
+
+  const handleUncompleteTodo = useCallback(
+    (id: string) => {
+      unCompleteTodoFn(id);
+    },
+    [unCompleteTodoFn]
+  );
 
   return (
     <div className="flex flex-col h-screen w-screen">
@@ -29,7 +43,8 @@ function App() {
         <h1 className="text-2xl font-bold">Todo List</h1>
         <TodoList
           todos={data || []}
-          onTodoClick={(id) => handleCompleteTodo(id)}
+          completeTodoCallback={(id) => handleCompleteTodo(id)}
+          unCompleteTodoCallback={(id) => handleUncompleteTodo(id)}
         />
       </section>
       {/* Create Todo Form Section */}

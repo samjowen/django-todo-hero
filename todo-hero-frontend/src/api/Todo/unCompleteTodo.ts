@@ -4,7 +4,7 @@ import { type Todo } from '../../types/Todo';
 
 const TODO_POSTFIX = '/todos';
 
-const completeTodo = async (id: Todo["id"]): Promise<void> => {
+const unCompleteTodo = async (id: Todo["id"]): Promise<void> => {
     try {
         const response = await axios.patch(`${CONFIG.TODOHERO_API_URL}${TODO_POSTFIX}/${id}/`, { is_completed: false });
         return response.data;
@@ -15,4 +15,4 @@ const completeTodo = async (id: Todo["id"]): Promise<void> => {
     }
 }
 
-export default completeTodo;
+export default unCompleteTodo;
