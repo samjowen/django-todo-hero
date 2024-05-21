@@ -1,41 +1,15 @@
-import React, { useCallback } from "react";
 import "./App.css";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import getTodos from "./api/Todo/getTodos";
 import TodoList from "./components/templates/TodoList";
-import completeTodo from "./api/Todo/completeTodo";
-import unCompleteTodo from "./api/Todo/unCompleteTodo";
+import useTodoList from "./hooks/useTodoList";
+
 function App() {
-  const queryClient = useQueryClient();
-  const { data } = useQuery({ queryKey: ["todos"], queryFn: getTodos });
-  const { mutate: completeTodoFn, isPending: isCompletePending } = useMutation({
-    mutationFn: completeTodo,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["todos"] });
-    },
-  });
-
-  const { mutate: unCompleteTodoFn, isPending: isUnCompletePending } =
-    useMutation({
-      mutationFn: unCompleteTodo,
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["todos"] });
-      },
-    });
-
-  const handleCompleteTodo = useCallback(
-    (id: string) => {
-      completeTodoFn(id);
-    },
-    [completeTodoFn]
-  );
-
-  const handleUncompleteTodo = useCallback(
-    (id: string) => {
-      unCompleteTodoFn(id);
-    },
-    [unCompleteTodoFn]
-  );
+  const {
+    todos,
+    handleCompleteTodo,
+    handleUncompleteTodo,
+    isCompletePending,
+    isUnCompletePending,
+  } = useTodoList();
 
   return (
     <div className="flex flex-col h-screen w-screen">
@@ -43,7 +17,7 @@ function App() {
       <section className="w-full h-1/2 overflow-scroll" id="todo-list">
         <h1 className="text-2xl font-bold">Todo List</h1>
         <TodoList
-          todos={data || []}
+          todos={todos || []}
           completeTodoCallback={(id) => handleCompleteTodo(id)}
           unCompleteTodoCallback={(id) => handleUncompleteTodo(id)}
           requestInProgress={isCompletePending || isUnCompletePending}
