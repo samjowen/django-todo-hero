@@ -7,4 +7,34 @@ This is a monorepo for the Todo Hero project. It contains the following packages
 
 ## Getting Started
 
-To run the project, please follow the instructions in the README files of the individual packages.
+### Backend
+
+```bash
+cd todoHero
+```
+
+```bash
+poetry install
+```
+
+```bash
+poetry run python manage.py migrate
+```
+
+```bash
+poetry run python manage.py runserver
+```
+
+### Frontend
+
+```bash
+cd todo-hero-frontend
+```
+
+```bash
+npm i
+```
+
+```bash
+npm run start
+```
