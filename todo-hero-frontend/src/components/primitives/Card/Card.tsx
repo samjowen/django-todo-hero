@@ -19,7 +19,7 @@ const CardTitle = ({ children, ...props }: CardTitleProps) => {
 
 const CardContent: FunctionComponent<DivProps> = ({ children, ...props }) => {
   return (
-    <div {...props} className="text-base text-gray-600">
+    <div {...props} className="flex flex-col gap-2 text-base text-gray-600">
       {children}
     </div>
   );
