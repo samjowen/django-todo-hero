@@ -10,10 +10,11 @@ const getTodos = async (): Promise<Todo[]> => {
         return response.data;
     } catch (error) {
         if (error instanceof Error) {
-            console.error('Error fetching todos', error.message);
+            throw new Error(error.message);
         }
     }
-    return []; // Add a return statement for the success case
+
+    return [];
 }
 
 export default getTodos;
