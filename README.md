@@ -2,7 +2,7 @@
 
 This is a monorepo for the Todo Hero project. It contains the following packages:
 
-* `todo-hero`: The backend API for the Todo Hero project.
+* `todoHero`: The Django backend API for the Todo Hero project.
 * `todo-hero-frontend`: The frontend web application for the Todo Hero project.
 
 ## Prerequisites
