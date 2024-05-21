@@ -12,8 +12,14 @@ const TodoCard = ({ todo, onClick }: TodoCardProps) => {
   return (
     <Card className="mb-4">
       <Card.Title>{todo.title}</Card.Title>
-      <Card.Content>{todo.task}</Card.Content>
-      <Checkbox onClick={() => onClick} checked={todo.isCompleted} />
+      <Card.Content>
+        {todo.task}
+        <span className="flex gap-2">
+          {" "}
+          Completed{" "}
+          <Checkbox onClick={() => onClick} checked={todo.is_completed} />
+        </span>
+      </Card.Content>
     </Card>
   );
 };
