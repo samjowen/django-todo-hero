@@ -2,20 +2,23 @@ import React from "react";
 import Card from "../../primitives/Card";
 import Checkbox from "../../primitives/Checkbox";
 import { type Todo } from "../../../types/Todo";
+import useTodoList from "../../../hooks/useTodoList";
 
 type TodoCardProps = {
   todo: Todo;
   completeTodoCallback: (id: Todo["id"]) => void;
   unCompleteTodoCallback: (id: Todo["id"]) => void;
-  requestInProgress: boolean;
 };
 
 const TodoCard = ({
   todo,
   completeTodoCallback,
   unCompleteTodoCallback,
-  requestInProgress,
 }: TodoCardProps) => {
+  const { isCompletePending, isUnCompletePending } = useTodoList();
+
+  const requestInProgress = isCompletePending || isUnCompletePending;
+
   return (
     <Card className="mb-4">
       <Card.Title>{todo.title}</Card.Title>

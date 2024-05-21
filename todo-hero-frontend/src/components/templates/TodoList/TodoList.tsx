@@ -4,20 +4,15 @@ import TodoListEmpty from "./TodoListEmpty";
 import TodoCard from "../Todo/TodoCard";
 import { type Todo } from "../../../types/Todo";
 import FlexList from "../../primitives/FlexList";
+import useTodoList from "../../../hooks/useTodoList";
 
 type TodoListProps = {
   todos: Todo[];
-  completeTodoCallback: (id: string) => void;
-  unCompleteTodoCallback: (id: string) => void;
-  requestInProgress: boolean;
 };
 
-const TodoList = ({
-  todos,
-  completeTodoCallback,
-  unCompleteTodoCallback,
-  requestInProgress = false,
-}: TodoListProps) => {
+const TodoList = ({ todos }: TodoListProps) => {
+  const { handleCompleteTodo, handleUncompleteTodo } = useTodoList();
+
   if (todos.length === 0) {
     return <TodoListEmpty />;
   }
@@ -28,9 +23,8 @@ const TodoList = ({
         <TodoCard
           key={todo.id}
           todo={todo}
-          completeTodoCallback={() => completeTodoCallback(todo.id)}
-          unCompleteTodoCallback={() => unCompleteTodoCallback(todo.id)}
-          requestInProgress={requestInProgress}
+          completeTodoCallback={handleCompleteTodo}
+          unCompleteTodoCallback={handleUncompleteTodo}
         />
       ))}
     </FlexList>
