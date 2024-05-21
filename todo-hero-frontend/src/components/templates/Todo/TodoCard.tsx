@@ -17,7 +17,11 @@ const TodoCard = ({ todo, onClick }: TodoCardProps) => {
         <span className="flex gap-2">
           {" "}
           Completed{" "}
-          <Checkbox onClick={() => onClick} checked={todo.is_completed} />
+          <Checkbox
+            readOnly
+            onClick={() => onClick(todo.id)}
+            checked={todo.is_completed}
+          />
         </span>
       </Card.Content>
     </Card>

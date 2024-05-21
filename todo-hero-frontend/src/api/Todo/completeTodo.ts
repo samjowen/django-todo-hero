@@ -1,19 +1,18 @@
 import axios from 'axios';
 import CONFIG from '../../config';
-import { Todo } from '../../types/Todo';
+import { type Todo } from '../../types/Todo';
 
 const TODO_POSTFIX = '/todos';
 
-const getTodos = async (): Promise<Todo[]> => {
+const completeTodo = async (id: Todo["id"]): Promise<void> => {
     try {
-        const response = await axios.get(`${CONFIG.TODOHERO_API_URL}${TODO_POSTFIX}`);
+        const response = await axios.patch(`${CONFIG.TODOHERO_API_URL}${TODO_POSTFIX}/${id}/`, { is_completed: true });
         return response.data;
     } catch (error) {
         if (error instanceof Error) {
             console.error('Error fetching todos', error.message);
         }
     }
-    return []; // Add a return statement for the success case
 }
 
-export default getTodos;
+export default completeTodo;
