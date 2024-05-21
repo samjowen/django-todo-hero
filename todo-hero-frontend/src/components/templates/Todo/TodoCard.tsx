@@ -29,8 +29,8 @@ const TodoCard = ({
           Completed{" "}
           <Checkbox
             readOnly
-            positiveCallback={() => completeTodoCallback(todo.id)}
-            negativeCallback={() => unCompleteTodoCallback(todo.id)}
+            onCheck={() => completeTodoCallback(todo.id)}
+            onUncheck={() => unCompleteTodoCallback(todo.id)}
             checked={todo.is_completed}
             disabled={requestInProgress}
           />
