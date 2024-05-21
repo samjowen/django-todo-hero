@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { ComponentProps } from "react";
 
-const InputField = () => {
+type InputFieldProps = {
+  label: string;
+} & ComponentProps<"input">;
+
+const InputField = ({ label, ...rest }: InputFieldProps) => {
   return (
-    <div>InputField</div>
-  )
-}
+    <>
+      <label className="block text-sm font-medium text-gray-700">{label}</label>
+      <input {...rest} className="w-full rounded bg-white" type="text">
+        InputField
+      </input>
+    </>
+  );
+};
 
-export default InputField
+export default InputField;
