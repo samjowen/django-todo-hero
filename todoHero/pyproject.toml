@@ -1,9 +1,10 @@
 [tool.poetry]
-name = "todo-hero"
+name = "todohero"
 version = "0.1.0"
 description = ""
 authors = ["Samuel Owen <SamHirael@gmail.com>"]
 readme = "README.md"
+license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.12"
