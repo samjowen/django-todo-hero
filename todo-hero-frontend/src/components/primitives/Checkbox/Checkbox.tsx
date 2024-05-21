@@ -5,17 +5,21 @@ type CheckboxProps = {
   negativeCallback?: () => void;
 } & ComponentProps<"input">;
 
-const Checkbox: React.FunctionComponent<CheckboxProps> = ({ ...props }) => {
+const Checkbox = ({
+  positiveCallback,
+  negativeCallback,
+  ...rest
+}: CheckboxProps) => {
   return (
     <input
+      {...rest}
       type="checkbox"
-      {...props}
       className="text-blue-500 rounded border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
       onChange={(e) => {
-        if (e.target.checked && props.positiveCallback) {
-          props.positiveCallback();
-        } else if (!e.target.checked && props.negativeCallback) {
-          props.negativeCallback();
+        if (e.target.checked && positiveCallback) {
+          positiveCallback();
+        } else if (!e.target.checked && negativeCallback) {
+          negativeCallback();
         }
       }}
     />
