@@ -1,13 +1,7 @@
 import React from "react";
 import Card from "../../primitives/Card";
 import Checkbox from "../../primitives/Checkbox";
-
-type Todo = {
-  id: string;
-  title: string;
-  task: string;
-  isCompleted: boolean;
-};
+import { type Todo } from "../../../types/Todo";
 
 type TodoCardProps = {
   todo: Todo;
