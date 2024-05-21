@@ -1,4 +1,5 @@
 import "./App.css";
+import CreateTodoForm from "./components/templates/CreateTodoForm";
 import TodoList from "./components/templates/TodoList";
 import useTodoList from "./hooks/useTodoList";
 
@@ -13,8 +14,11 @@ function App() {
         <TodoList todos={todos} />
       </section>
       {/* Create Todo Form Section */}
-      <section className="w-full h-1/2" id="todo-form">
-        Todo Form
+      <section
+        className="flex flex-col w-full h-1/2 items-center justify-center"
+        id="todo-form"
+      >
+        <CreateTodoForm />
       </section>
     </div>
   );
