@@ -19,7 +19,6 @@ const CreateTodoForm: React.FC = () => {
     createNewTodo({ title: todoTitle, task: todoTask });
   }, [todoTitle, todoTask, createNewTodo]);
 
-  console.log("error: ", error);
   return (
     <form
       onSubmit={(e) => {

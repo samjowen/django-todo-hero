@@ -10,7 +10,7 @@ const unCompleteTodo = async (id: Todo["id"]): Promise<void> => {
         return response.data;
     } catch (error) {
         if (error instanceof Error) {
-            console.error('Error uncompleting todo: ', error.message);
+            throw new Error(error.message);
         }
     }
 }
