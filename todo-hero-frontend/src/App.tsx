@@ -18,6 +18,9 @@ function App() {
     completeTodoFn(id);
   };
 
+  const handleUncompleteTodo = (id: string) => {
+    console.log("Uncomplete Todo", id);
+  }
 
   return (
     <div className="flex flex-col h-screen w-screen">

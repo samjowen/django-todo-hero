@@ -6,11 +6,11 @@ const TODO_POSTFIX = '/todos';
 
 const completeTodo = async (id: Todo["id"]): Promise<void> => {
     try {
-        const response = await axios.patch(`${CONFIG.TODOHERO_API_URL}${TODO_POSTFIX}/${id}/`, { is_completed: true });
+        const response = await axios.patch(`${CONFIG.TODOHERO_API_URL}${TODO_POSTFIX}/${id}/`, { is_completed: false });
         return response.data;
     } catch (error) {
         if (error instanceof Error) {
-            console.error('Error completing todo: ', error.message);
+            console.error('Error uncompleting todo: ', error.message);
         }
     }
 }
