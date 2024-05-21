@@ -9,12 +9,14 @@ type TodoListProps = {
   todos: Todo[];
   completeTodoCallback: (id: string) => void;
   unCompleteTodoCallback: (id: string) => void;
+  requestInProgress: boolean;
 };
 
 const TodoList = ({
   todos,
   completeTodoCallback,
   unCompleteTodoCallback,
+  requestInProgress = false,
 }: TodoListProps) => {
   if (todos.length === 0) {
     return <TodoListEmpty />;
@@ -28,6 +30,7 @@ const TodoList = ({
           todo={todo}
           completeTodoCallback={() => completeTodoCallback(todo.id)}
           unCompleteTodoCallback={() => unCompleteTodoCallback(todo.id)}
+          requestInProgress={requestInProgress}
         />
       ))}
     </FlexList>

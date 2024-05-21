@@ -7,12 +7,14 @@ type TodoCardProps = {
   todo: Todo;
   completeTodoCallback: (id: Todo["id"]) => void;
   unCompleteTodoCallback: (id: Todo["id"]) => void;
+  requestInProgress: boolean;
 };
 
 const TodoCard = ({
   todo,
   completeTodoCallback,
   unCompleteTodoCallback,
+  requestInProgress,
 }: TodoCardProps) => {
   return (
     <Card className="mb-4">
@@ -27,6 +29,7 @@ const TodoCard = ({
             positiveCallback={() => completeTodoCallback(todo.id)}
             negativeCallback={() => unCompleteTodoCallback(todo.id)}
             checked={todo.is_completed}
+            disabled={requestInProgress}
           />
         </span>
       </Card.Content>

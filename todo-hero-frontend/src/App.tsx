@@ -8,19 +8,20 @@ import unCompleteTodo from "./api/Todo/unCompleteTodo";
 function App() {
   const queryClient = useQueryClient();
   const { data } = useQuery({ queryKey: ["todos"], queryFn: getTodos });
-  const { mutate: completeTodoFn } = useMutation({
+  const { mutate: completeTodoFn, isPending: isCompletePending } = useMutation({
     mutationFn: completeTodo,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
 
-  const { mutate: unCompleteTodoFn } = useMutation({
-    mutationFn: unCompleteTodo,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["todos"] });
-    },
-  });
+  const { mutate: unCompleteTodoFn, isPending: isUnCompletePending } =
+    useMutation({
+      mutationFn: unCompleteTodo,
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["todos"] });
+      },
+    });
 
   const handleCompleteTodo = useCallback(
     (id: string) => {
@@ -45,6 +46,7 @@ function App() {
           todos={data || []}
           completeTodoCallback={(id) => handleCompleteTodo(id)}
           unCompleteTodoCallback={(id) => handleUncompleteTodo(id)}
+          requestInProgress={isCompletePending || isUnCompletePending}
         />
       </section>
       {/* Create Todo Form Section */}

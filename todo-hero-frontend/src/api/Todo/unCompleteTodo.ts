@@ -2,7 +2,7 @@ import axios from 'axios';
 import CONFIG from '../../config';
 import { type Todo } from '../../types/Todo';
 
-const TODO_POSTFIX = '/todos';
+const TODO_POSTFIX = 'todos';
 
 const unCompleteTodo = async (id: Todo["id"]): Promise<void> => {
     try {
